@@ -66,6 +66,7 @@ nav {
       }
       @include sm {
         display: initial;
+        background-color: transparent;
       }
     }
 

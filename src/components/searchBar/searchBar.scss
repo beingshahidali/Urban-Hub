@@ -1,0 +1,78 @@
+@import "../../responsive.scss";
+.searchBar {
+  .type {
+    button {
+      padding: 16px 36px;
+      border: 1px solid #999;
+      background-color: white;
+      border-bottom: none;
+      cursor: pointer;
+      text-transform: capitalize;
+      &.active {
+        background-color: black;
+        color: white;
+      }
+      &:first-child {
+        border-right: none;
+        border-top-left-radius: 10px;
+        @include sm {
+          border-bottom: 1px solid #999;
+        }
+      }
+      &:last-child {
+        border-left: none;
+        border-top-right-radius: 10px;
+      }
+    }
+  }
+  form {
+    display: flex;
+    border: 1px solid #999;
+    height: 54px;
+    justify-content: space-between;
+    gap: 5px;
+    @include sm {
+      flex-direction: column;
+      border: none;
+    }
+    input {
+      border: none;
+      padding: 0px 10px;
+      @include lg {
+        &:nth-child(2),
+        :nth-child(3) {
+          width: 140px;
+        }
+      }
+      @include md {
+        width: auto;
+        &:nth-child(2),
+        :nth-child(3) {
+          width: auto;
+        }
+      }
+      @include sm {
+        padding: 20px;
+        border: 1px solid #999;
+        height: 10px;
+      }
+    }
+    button {
+      background-color: #fece51;
+      border: none;
+      cursor: pointer;
+      flex: 0.35;
+      img {
+        height: 24px;
+        width: 24px;
+      }
+      @include sm {
+        padding: 8px;
+      }
+      &:hover {
+        background-color: black;
+        transition: all 0.4ls ease-in-out;
+      }
+    }
+  }
+}
