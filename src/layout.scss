@@ -2,11 +2,13 @@
 
 .layout {
   height: 100vh;
-  max-width: 1366px;
+  max-width: 1066px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+  display: flex;
+  flex-direction: column;
 
   @include lg {
     max-width: 1280px;
@@ -16,5 +18,8 @@
   }
   @include sm {
     max-width: 640px;
+  }
+  .content {
+    flex: 1;
   }
 }
