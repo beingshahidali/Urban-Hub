@@ -27,6 +27,11 @@ function Navbar() {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"
             alt="Menu icon"
             onClick={() => setOpen(!open)}
+            style={{
+              filter: open
+                ? "invert(1) brightness(2)"
+                : "invert(0) brightness(1)",
+            }}
           ></img>
         </div>
         <div className={open ? "menu active " : "menu"}>
