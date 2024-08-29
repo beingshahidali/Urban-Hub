@@ -21,6 +21,7 @@
     // background-color: #efc8c8;
   }
   .content {
-    flex: 1;
+    flex: 2;
+    height: calc(100vh - 100px);
   }
 }
