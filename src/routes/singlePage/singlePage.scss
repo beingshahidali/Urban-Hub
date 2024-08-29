@@ -1,9 +1,26 @@
+@import "../../responsive.scss";
 .singlePage {
   display: flex;
+  @include md {
+    flex-direction: column;
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
+  }
   .details {
     flex: 3;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+
+    @include md {
+      flex: none;
+      height: max-content;
+    }
     .wrapper {
       padding-right: 50px;
+      margin-bottom: 50px;
+      @include md {
+        padding-right: 10px;
+      }
 
       .info {
         margin-top: 50px;
@@ -67,9 +84,109 @@
   .features {
     flex: 2;
     background-color: #fcf5f3;
-    height: 100vh;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding-top: 20px;
+    @include md {
+      flex: none;
+      height: max-content;
+    }
+
     .wrapper {
       padding: 0px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+      margin-bottom: 50px;
+      @include md {
+        padding-right: 10px;
+      }
+      img {
+        height: 24px;
+        width: 24px;
+      }
+
+      .title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        img {
+          background-color: rgba(254, 205, 81, 0.162);
+        }
+        .featureText {
+          span {
+            font-weight: bold;
+          }
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .listVertical {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+      .listHorizontal {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        padding: 20px 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+      .sizes {
+        display: flex;
+        justify-content: space-between;
+
+        @include lg {
+          font-size: 12px;
+        }
+
+        .size {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background-color: white;
+          border-radius: 10px;
+          padding: 10px;
+        }
+      }
+      .mapContainer {
+        width: 100%;
+        height: 200px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background-color: white;
+          border: 1px solid #fece51;
+          border-radius: 10px;
+          cursor: pointer;
+          img {
+            height: 16px;
+            width: 16px;
+          }
+        }
+      }
     }
   }
 }
