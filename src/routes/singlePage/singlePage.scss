@@ -1,0 +1,75 @@
+.singlePage {
+  display: flex;
+  .details {
+    flex: 3;
+    .wrapper {
+      padding-right: 50px;
+
+      .info {
+        margin-top: 50px;
+        .top {
+          display: flex;
+          justify-content: space-between;
+          .post {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            h1 {
+              font-weight: 400;
+            }
+            .address {
+              display: flex;
+              gap: 5px;
+              align-items: center;
+              color: #888;
+              font-size: 14px;
+              img {
+                height: 16px;
+                width: 16px;
+              }
+            }
+            .price {
+              background-color: rgba(254, 205, 81, 0.462);
+              padding: 5x;
+              border-radius: 5px;
+              width: fit-content;
+              font-weight: 300;
+            }
+          }
+          .user {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background-color: rgba(254, 205, 81, 0.462);
+            padding: 0px 50px;
+            border-radius: 10px;
+            img {
+              height: 50px;
+              width: 50px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+            span {
+              font-weight: 600;
+            }
+          }
+        }
+        .bottom {
+          margin-top: 50px;
+          color: #555;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+  .features {
+    flex: 2;
+    background-color: #fcf5f3;
+    height: 100vh;
+    .wrapper {
+      padding: 0px 20px;
+    }
+  }
+}
