@@ -1,8 +1,13 @@
+@import "../../responsive.scss";
+
 .listPage {
   display: flex;
   height: 100%;
+
   .listContainer {
     flex: 3;
+    height: 100%;
+
     .wrapper {
       height: 100%;
       padding-right: 50px;
@@ -15,6 +20,11 @@
   }
   .mapContainer {
     flex: 2;
-    background-color: red;
+    height: 100%;
+    background-color: #fcf5f3;
+
+    @include md {
+      display: none;
+    }
   }
 }
