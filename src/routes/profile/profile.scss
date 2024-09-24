@@ -1,11 +1,21 @@
+@import "../../responsive.scss";
 .profile {
   display: flex;
   height: 100%;
+
+  @include md {
+    flex-direction: column;
+    overflow: scroll;
+  }
 
   .details {
     flex: 3;
     overflow-y: scroll;
     padding-bottom: 50px;
+
+    @include md {
+      flex: none;
+    }
     .wrapper {
       padding-right: 50px;
       display: flex;
@@ -51,6 +61,10 @@
     flex: 2;
     background-color: #fcf5f3;
     height: 100%;
+
+    @include md {
+      flex: none;
+    }
 
     .wrapper {
       padding: 0px 20px;
