@@ -25,7 +25,6 @@ function RequireAuth() {
 
   return (
     <>
-      currentUser &&
       <div className="layout">
         <div className="navbar">
           <Navbar />
