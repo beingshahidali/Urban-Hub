@@ -1,7 +1,8 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
+import apiRequest from "../../lib/apiRequest";
+import { toast } from "react-toastify";
 
 function Register() {
   const [error, setError] = useState("");
@@ -11,13 +12,15 @@ function Register() {
     const formData = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(formData);
     try {
-      const res = await axios.post("http://localhost:8800/api/auth/register", {
+      const res = await apiRequest.post("/auth/register", {
         username,
         email,
         password,
       });
+      toast.success("Successfully registered as " + username);
       navigate("/login");
     } catch (e) {
+      toast.error("Coudn't register user");
       setError(e.response?.data?.message || "An error occurred");
       throw new Error(e.message);
     }
