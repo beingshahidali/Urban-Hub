@@ -1,5 +1,5 @@
 import HomePage from "./routes/homepage/HomePage";
-import Layout from "./routes/layout/layout";
+import { Layout, RequireAuth } from "./routes/layout/layout";
 import ListPage from "./routes/listPage/ListPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SinglePage from "./routes/singlePage/SinglePage";
@@ -24,10 +24,7 @@ function App() {
           path: "/:id",
           element: <SinglePage />,
         },
-        {
-          path: "/profile",
-          element: <ProfilePage />,
-        },
+
         {
           path: "/login",
           element: <Login />,
@@ -35,6 +32,16 @@ function App() {
         {
           path: "/register",
           element: <Register />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <ProfilePage />,
         },
       ],
     },
