@@ -37,6 +37,7 @@ export const login = async (req, res) => {
       return res.status(401).send({ message: "Invalid password" });
     // res.setHeader("Set-cookie", "test=" + "myValue").send("Successfully ");
     const age = 1000 * 60 * 7;
+    const { password: userPassword, ...userInfo } = user;
     const token = jwt.sign(
       {
         id: user.id,
@@ -51,7 +52,7 @@ export const login = async (req, res) => {
         maxAge: age,
       })
       .status(200)
-      .send({ message: "Successfully logged in" });
+      .send(userInfo);
   } catch (e) {
     res.status(500).send("An error occurred while logging in: " + e.message);
   }
