@@ -1,60 +1,15 @@
 import "./login.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import apiRequest from "../../lib/apiRequest";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-    const formData = new FormData(e.target);
-
-    const username = formData.get("username");
-    const password = formData.get("password");
-
-    try {
-      const res = await apiRequest.post("/auth/login", {
-        username,
-        password,
-      });
-      localStorage.setItem("user", JSON.stringify(res.data));
-      toast.success(" Welcome back , " + username);
-      navigate("/");
-    } catch (err) {
-      toast.success("Something went wrong !");
-      setError(err.response.data.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   return (
     <div className="login">
       <div className="formContainer">
-        <form onSubmit={handleSubmit}>
+        <form>
           <h1>Welcome back</h1>
-          <input
-            name="username"
-            required
-            minLength={3}
-            maxLength={20}
-            type="text"
-            placeholder="Username"
-          />
-          <input
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-          />
-          <button disabled={isLoading}>Login</button>
-          {error && <span>{error}</span>}
+          <input name="username" type="text" placeholder="Username" />
+          <input name="password" type="password" placeholder="Password" />
+          <button>Login</button>
           <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
       </div>
@@ -64,4 +19,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;

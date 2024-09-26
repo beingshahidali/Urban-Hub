@@ -3,14 +3,19 @@ import Layout from "./routes/layout/layout";
 import ListPage from "./routes/listPage/ListPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SinglePage from "./routes/singlePage/SinglePage";
-import Profile from "./routes/profile/Profile";
+import Login from "./routes/login/Login";
+import ProfilePage from "./routes/profilePage/profilePage";
+import Register from "./routes/register/register";
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <HomePage /> },
+        {
+          path: "/",
+          element: <HomePage />,
+        },
         {
           path: "/list",
           element: <ListPage />,
@@ -21,7 +26,15 @@ function App() {
         },
         {
           path: "/profile",
-          element: <Profile />,
+          element: <ProfilePage />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
         },
       ],
     },
