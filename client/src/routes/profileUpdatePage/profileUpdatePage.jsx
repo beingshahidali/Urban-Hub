@@ -4,11 +4,14 @@ import { AuthContext } from "../../context/authContext";
 import apiRequest from "../../lib/apiRequest";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+// import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import axios from "axios";
 
 function ProfileUpdatePage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
+  const [avatar, setAvatar] = useState(currentUser.avatar);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +24,7 @@ function ProfileUpdatePage() {
           username,
           email,
           password,
+          avatar,
         },
         { withCredentials: true }
       );
@@ -33,6 +37,37 @@ function ProfileUpdatePage() {
       toast.error("Failed to update user");
     }
   };
+
+  const uploadImage = async (file) => {
+    const url = `https://api.cloudinary.com/v1_1/dosizus5p/image/upload`;
+    const uploadPreset = "Urban-Hub";
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+
+    try {
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const imgUrl = response.data.secure_url;
+      setAvatar(imgUrl);
+      return response.data;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+
+  // Usage example with a file input
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      uploadImage(file);
+    }
+  };
+
   return (
     <div className="profileUpdatePage">
       <div className="formContainer">
@@ -67,12 +102,13 @@ function ProfileUpdatePage() {
       <div className="sideContainer">
         <img
           src={
-            currentUser?.avatar ||
+            avatar ||
             "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           }
           alt=""
           className="avatar"
         />
+        <input type="file" onChange={handleFileChange} />
       </div>
     </div>
   );
