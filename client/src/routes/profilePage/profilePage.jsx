@@ -5,6 +5,7 @@ import apiRequest from "../../lib/apiRequest";
 import "./profilePage.scss";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext.jsx";
+import { toast } from "react-toastify";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -13,7 +14,9 @@ function ProfilePage() {
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
+      toast.success("Logged out successfully");
       // localStorage.removeItem("user");
+
       updateUser(null);
       navigate("/");
     } catch (e) {
