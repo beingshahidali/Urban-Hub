@@ -41,14 +41,15 @@ export const addPost = async (req, res) => {
       data: {
         ...body.postData,
         userId: tokenUserId,
-        postDetail: { create: body.postDetail },
+        postDetail: {
+          create: body.postDetail,
+        },
       },
     });
-
-    res.status(201).json(newPost);
+    res.status(200).json(newPost);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Error creating post" });
+    console.log(err);
+    res.status(500).json({ message: "Failed to create post" });
   }
 };
 
