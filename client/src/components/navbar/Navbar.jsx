@@ -3,7 +3,6 @@ import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 function Navbar() {
-  console.log("jordan this is the navbar");
   const [open, setOpen] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
