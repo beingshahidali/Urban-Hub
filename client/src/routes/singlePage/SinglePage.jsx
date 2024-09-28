@@ -2,28 +2,37 @@ import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { singlePostData, userData } from "../../lib/dummyData";
+import { useLoaderData } from "react-router-dom";
+import DOMPurify from "dompurify";
 function SinglePage() {
+  const post = useLoaderData();
+  console.log(post);
   return (
     <div className="singlePage">
       <div className="details">
         <div className="wrapper">
-          <Slider images={singlePostData.images} />
+          <Slider images={post.images} />
           <div className="info">
             <div className="top">
               <div className="post">
-                <h1>{singlePostData.title}</h1>
+                <h1>{post.title}</h1>
                 <div className="address">
                   <img src="/pin.png" alt="pin" />
-                  <span>{singlePostData.address}</span>
+                  <span>{post.address}</span>
                 </div>
-                <div className="price">${singlePostData.price}</div>
+                <div className="price">${post.price}</div>
               </div>
               <div className="user">
-                <img src={userData.img} alt="usr image" />
-                <span> {userData.name}</span>
+                <img src={post?.user?.avatar} alt="usr image" />
+                <span> {post?.user?.username}</span>
               </div>
             </div>
-            <div className="bottom">{singlePostData.description}</div>
+            <div
+              className="bottom"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify(post?.postDetail?.desc),
+              }}
+            ></div>
           </div>
         </div>
       </div>
@@ -57,15 +66,15 @@ function SinglePage() {
           <div className="sizes">
             <div className="size">
               <img src="/size.png" />
-              <span>80sqFt</span>
+              <span>{post?.postDetail?.size}sqFt</span>
             </div>
             <div className="size">
               <img src="/bed.png" />
-              <span>2 bedroom</span>
+              <span>{post?.bedroom} bedroom</span>
             </div>
             <div className="size">
               <img src="/bath.png" />
-              <span>1 bathroom</span>
+              <span>{post?.bathroom} bathroom</span>
             </div>
           </div>
           <p className="title">Nearby Places</p>
@@ -74,21 +83,21 @@ function SinglePage() {
               <img src="/school.png" />
               <div className="featureText">
                 <span>School</span>
-                <p>250m away</p>
+                <p>{post?.postDetail?.school}m away</p>
               </div>
             </div>
             <div className="feature">
               <img src="/pet.png" />
               <div className="featureText">
                 <span>Bus stop </span>
-                <p>100m away</p>
+                <p>{post?.postDetail?.bus}m away</p>
               </div>
             </div>
             <div className="feature">
               <img src="/fee.png" />
               <div className="featureText">
                 <span>Restaurant</span>
-                <p>200m away</p>
+                <p>{post?.postDetail?.restaurant}m away</p>
               </div>
             </div>
           </div>

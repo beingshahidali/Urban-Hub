@@ -50,35 +50,39 @@ function NewPostPage() {
       setError(error);
     }
   };
-  const uploadImage = async (file) => {
+  const uploadImages = async (files) => {
     const url = `https://api.cloudinary.com/v1_1/dosizus5p/image/upload`;
     const uploadPreset = "Urban-Hub";
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
+    const uploadedImages = [];
 
-    try {
-      const response = await axios.post(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      const imgUrl = response.data.secure_url;
-      setImages(imgUrl);
-      console.log(imgUrl);
-      return response.data;
-    } catch (error) {
-      console.error("Error uploading image:", error);
+    for (let file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+
+      try {
+        const response = await axios.post(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const imgUrl = response.data.secure_url;
+        console.log(imgUrl);
+        uploadedImages.push(imgUrl); // Store each uploaded image URL
+        console.log(imgUrl);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
     }
+
+    setImages(uploadedImages); // Set state with all uploaded image URLs
+    return uploadedImages;
   };
 
-  // Usage example with a file input
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      uploadImage(file);
-    }
+    const files = event.target.files;
+    uploadImages(files);
   };
 
   return (
@@ -188,16 +192,11 @@ function NewPostPage() {
         </div>
       </div>
       <div className="sideContainer">
-        <img
-          src={
-            images ||
-            "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          }
-          alt=""
-          className="avatar"
-        />
+        {images.map((image, index) => (
+          <img src={image} key={index} alt="" />
+        ))}
 
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} multiple />
       </div>
     </div>
   );
