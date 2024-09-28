@@ -14,11 +14,15 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function Map({ items }) {
-  console.log(items);
+  // console.log(items);
   return (
     <MapContainer
-      center={[51.505, -0.09]}
-      zoom={6}
+      center={
+        items.length === 1
+          ? [items[0].latitude, items[0].longitude]
+          : [52.4797, -1.90269]
+      }
+      zoom={4}
       scrollWheelZoom={false}
       className="map"
     >
