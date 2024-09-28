@@ -57,21 +57,25 @@
         height: 10px;
       }
     }
-    button {
-      background-color: #fece51;
-      border: none;
-      cursor: pointer;
+    a {
       flex: 0.35;
-      img {
-        height: 24px;
-        width: 24px;
-      }
-      @include sm {
-        padding: 8px;
-      }
-      &:hover {
-        background-color: black;
-        transition: all 0.4ls ease-in-out;
+      background-color: #fece51;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button {
+        border: none;
+        cursor: pointer;
+        img {
+          height: 24px;
+          width: 24px;
+        }
+        @include sm {
+          padding: 8px;
+        }
+        &:hover {
+          transition: all 0.4ls ease-in-out;
+        }
       }
     }
   }
