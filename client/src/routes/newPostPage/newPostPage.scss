@@ -36,7 +36,8 @@
 
           &.description {
             width: 100%;
-            padding: 1px;
+            height: auto;
+            margin: auto;
             .quill > .ql-container > .ql-editor {
               height: 200px;
               font-size: 16px;
