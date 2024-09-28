@@ -1,12 +1,15 @@
 import "./list.scss";
 import { listData } from "../../lib/dummyData";
-import Card from "../card/Card";
+import { lazy, Suspense } from "react";
+const Card = lazy(() => import("../card/Card"));
 function List() {
   return (
     <div className="list">
-      {listData.map((item, index) => (
-        <Card key={index} item={item} />
-      ))}
+      <Suspense fallback={<p>Loading Cards...</p>}>
+        {listData.map((item, index) => (
+          <Card key={index} item={item} />
+        ))}
+      </Suspense>
     </div>
   );
 }
