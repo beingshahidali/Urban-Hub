@@ -3,8 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import Notification from "../../components/notification/Notification.jsx";
 import { AuthContext } from "../../context/authContext.jsx";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 function Layout() {
+  console.log("Layout is gettign rendered");
   return (
     <>
       <div className="layout">
@@ -12,7 +13,9 @@ function Layout() {
           <Navbar />
         </div>
         <div className="content">
-          <Outlet />
+          <Suspense fallback={<p>Loading content...</p>}>
+            <Outlet />
+          </Suspense>
         </div>
         <Notification />
       </div>
@@ -30,7 +33,9 @@ function RequireAuth() {
           <Navbar />
         </div>
         <div className="content">
-          <Outlet />
+          <Suspense fallback={<p>Loading content...</p>}>
+            <Outlet />
+          </Suspense>
         </div>
         <Notification />
       </div>
