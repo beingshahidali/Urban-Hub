@@ -21,6 +21,7 @@ function NewPostPage() {
             </div>
             <div className="item description">
               <label htmlFor="desc">Description</label>
+              <textarea rows={5}></textarea>
             </div>
             <div className="item">
               <label htmlFor="city">City</label>
