@@ -41,7 +41,7 @@ function ProfilePage() {
               <img
                 src={
                   currentUser?.avatar ||
-                  "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
                 }
                 alt=""
               />

@@ -4,14 +4,16 @@ import { AuthContext } from "../../context/authContext";
 import apiRequest from "../../lib/apiRequest";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import axios from "axios";
+import MyLoader from "../../components/svg/MyLoader";
 
 function ProfileUpdatePage() {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
   const [avatar, setAvatar] = useState(currentUser.avatar);
+  const [fileName, setFileName] = useState("Choose a file");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,8 @@ function ProfileUpdatePage() {
     formData.append("file", file);
     formData.append("upload_preset", uploadPreset);
 
+    setLoading(true);
+
     try {
       const response = await axios.post(url, formData, {
         headers: {
@@ -57,13 +61,15 @@ function ProfileUpdatePage() {
       return response.data;
     } catch (error) {
       console.error("Error uploading image:", error);
+    } finally {
+      setLoading(false); // Set loading to false after the upload is complete
     }
   };
 
-  // Usage example with a file input
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      setFileName(file.name);
       uploadImage(file);
     }
   };
@@ -100,15 +106,26 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img
-          src={
-            avatar ||
-            "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          }
-          alt=""
-          className="avatar"
-        />
-        <input type="file" onChange={handleFileChange} />
+        {loading ? (
+          <div className="my-loader">
+            <MyLoader />
+          </div>
+        ) : (
+          <img
+            src={
+              avatar ||
+              "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+            }
+            alt=""
+            className="avatar"
+          />
+        )}
+        <div className="file-upload-container">
+          <label htmlFor="file-upload" className="custom-file-upload">
+            {fileName}
+          </label>
+          <input id="file-upload" type="file" onChange={handleFileChange} />
+        </div>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ function Navbar() {
               <img
                 src={
                   currentUser?.avatar ||
-                  "https://png.pngtree.com/png-clipart/20231019/original/pngtree-user-profile-avatar-png-image_13369988.png"
+                  "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
                 }
               />
               <span>{currentUser?.username}</span>
