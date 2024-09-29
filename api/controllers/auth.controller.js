@@ -36,7 +36,7 @@ export const login = async (req, res) => {
     if (!isPasswordValid)
       return res.status(401).send({ message: "Invalid password" });
     // res.setHeader("Set-cookie", "test=" + "myValue").send("Successfully ");
-    const age = 1000 * 60 * 7;
+    const age = 1000 * 60 * 60 * 4;
     const { password: userPassword, ...userInfo } = user;
     const token = jwt.sign(
       {
