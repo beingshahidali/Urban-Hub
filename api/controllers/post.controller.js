@@ -1,4 +1,5 @@
 import prisma from "../lib/prisma.js";
+import jwt from "jsonwebtoken";
 export const getPosts = async (req, res) => {
   const query = req.query;
   try {
@@ -28,7 +29,7 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   const id = req.params.id;
   try {
-    const user = await prisma.post.findUnique({
+    const post = await prisma.post.findUnique({
       where: { id },
       include: {
         postDetail: true,
@@ -40,11 +41,36 @@ export const getPost = async (req, res) => {
         },
       },
     });
-    res.status(200).json(user);
+
+    const token = req.cookies?.token;
+
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
+        if (!err) {
+          const saved = await prisma.savedPost.findUnique({
+            where: {
+              userId_postId: {
+                postId: id,
+                userId: payload.id,
+              },
+            },
+          });
+          return res
+            .status(200)
+            .json({ ...post, isSaved: saved ? true : false });
+        } else {
+          return res.status(401).json({ message: "Invalid token" });
+        }
+      });
+    } else {
+      return res.status(200).json({ ...post, isSaved: false });
+    }
   } catch (err) {
-    res.status(500).json({ message: "Error getting post" });
+    console.log(err);
+    return res.status(500).json({ message: "Failed to get post" });
   }
 };
+
 export const addPost = async (req, res) => {
   const body = req.body;
   const tokenUserId = req.userId;
