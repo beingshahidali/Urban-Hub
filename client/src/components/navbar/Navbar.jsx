@@ -28,7 +28,7 @@ function Navbar() {
             <div className="user">
               <img
                 src={
-                  currentUser?.img ||
+                  currentUser?.avatar ||
                   "https://png.pngtree.com/png-clipart/20231019/original/pngtree-user-profile-avatar-png-image_13369988.png"
                 }
               />
