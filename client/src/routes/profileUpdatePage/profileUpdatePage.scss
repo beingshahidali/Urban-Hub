@@ -3,7 +3,7 @@
   display: flex;
 
   .formContainer {
-    flex:3;
+    flex: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,9 +47,52 @@
     align-items: center;
     justify-content: center;
 
-    .avatar{
+    .avatar {
       width: 50%;
       object-fit: cover;
     }
   }
+}
+/* Hide the default file input */
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 12px 24px;
+  cursor: pointer;
+  border: 2px solid teal;
+  border-radius: 8px;
+  background-color: #fff;
+  color: teal;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.custom-file-upload:hover {
+  background-color: teal;
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.custom-file-upload:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* File upload container */
+.file-upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.my-loader {
+  width: 100px;
+  height: 100px;
 }

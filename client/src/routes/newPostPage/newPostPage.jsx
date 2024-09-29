@@ -197,6 +197,7 @@ function NewPostPage() {
         ))}
 
         <input type="file" onChange={handleFileChange} multiple />
+        <h1> this is Jordan</h1>
       </div>
     </div>
   );
