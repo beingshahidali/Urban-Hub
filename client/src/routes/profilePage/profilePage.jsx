@@ -1,11 +1,11 @@
 import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
-import Chat from "../../components/chat/Chat";
-import List from "../../components/list/List";
 import apiRequest from "../../lib/apiRequest";
 import "./profilePage.scss";
-import { Suspense, useContext } from "react";
+import { lazy, Suspense, useContext } from "react";
 import { AuthContext } from "../../context/authContext.jsx";
 import { toast } from "react-toastify";
+const List = lazy(() => import("../../components/list/List"));
+const Chat = lazy(() => import("../../components/chat/Chat"));
 
 function ProfilePage() {
   const data = useLoaderData();

@@ -2,10 +2,14 @@ import "./listPage.scss";
 import "../../components/filter/Filter";
 import Filter from "../../components/filter/Filter";
 import { listData } from "../../lib/dummyData";
-import Card from "../../components/card/Card";
-import Map from "../../components/map/Map";
+// import Map from "../../components/map/Map";
+
 import { Await, useLoaderData } from "react-router-dom";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
+import Myloader from "../../components/svg/MyLoader";
+// import Card from "../../components/card/Card";
+const Map = lazy(() => import("../../components/map/Map"));
+const Card = lazy(() => import("../../components/card/Card"));
 function ListPage() {
   // const data = listData;
   const posts = useLoaderData();
@@ -15,7 +19,7 @@ function ListPage() {
       <div className="listContainer">
         <div className="wrapper">
           <Filter />
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Myloader />}>
             <Await
               resolve={posts.postResponse}
               errorElement={<p>Error loading package location!</p>}
@@ -30,7 +34,9 @@ function ListPage() {
         </div>
       </div>
       <div className="mapContainer">
-        <Map items={listData} />
+        <Suspense fallback={<Myloader />}>
+          <Map items={listData} />
+        </Suspense>
       </div>
     </div>
   );
