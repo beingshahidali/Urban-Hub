@@ -19,3 +19,10 @@ export const listPageLoader = async ({ request, params }) => {
     return { error: "Failed to load posts" };
   }
 };
+
+export const profilePageLoader = async () => {
+  const postPromise = apiRequest("/users/profilePosts");
+  return defer({
+    postResponse: postPromise,
+  });
+};
