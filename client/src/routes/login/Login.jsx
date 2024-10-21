@@ -22,10 +22,16 @@ function Login() {
     const password = formData.get("password");
 
     try {
-      const res = await apiRequest.post("/auth/login", {
-        username,
-        password,
-      });
+      const res = await apiRequest.post(
+        "https://urban-hub-expressjs-1.onrender.com/auth/login",
+        {
+          username,
+          password,
+        },
+        {
+          withCredentials: true, // Ensure cookies are included
+        }
+      );
       // localStorage.setItem("user", JSON.stringify(res.data));
 
       updateUser(res.data);
