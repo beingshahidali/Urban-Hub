@@ -12,11 +12,17 @@ function Register() {
     const formData = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(formData);
     try {
-      const res = await apiRequest.post("/auth/register", {
-        username,
-        email,
-        password,
-      });
+      const res = await apiRequest.post(
+        "https://urban-hub-expressjs-1.onrender.com/auth/register",
+        {
+          username,
+          email,
+          password,
+        },
+        {
+          withCredentials: true, // Ensure cookies are included if they are set
+        }
+      );
       toast.success("Successfully registered as " + username);
       navigate("/login");
     } catch (e) {
